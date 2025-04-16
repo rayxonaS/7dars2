@@ -40,7 +40,6 @@ function Navbar() {
     <AppBar position="static" sx={{ mb: 3 }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -56,7 +55,16 @@ function Navbar() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            <Box
+              component="img"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1xwEZtCsextV_Vh5QCPt7GdN0jglJLZ6yqA&s"
+              sx={{
+                width: 60,
+                height: 60,
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -112,7 +120,15 @@ function Navbar() {
           >
             LOGO
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: "none", md: "flex" },
+              "&:hover": {
+                color: "blue",
+              },
+            }}
+          >
             {pages.map((page) => (
               <Button
                 key={page}
@@ -125,9 +141,16 @@ function Navbar() {
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
+              <Box
+                component="img"
+                src="https://t4.ftcdn.net/jpg/03/55/85/43/360_F_355854360_CRtn7S31bUATYTSvC0w443SCHQr0am1d.jpg"
+                sx={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}

@@ -11,7 +11,10 @@ function Home() {
   return (
     <section>
       <Container maxWidth="xl">
-        <Typography variant="h3" sx={{ mb: 5 }}>
+        <Typography
+          variant="h3"
+          sx={{ mb: 5, alignItems: "center", justifyContent: "center" }}
+        >
           Products :
         </Typography>
       </Container>
