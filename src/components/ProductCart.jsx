@@ -13,6 +13,16 @@ import {
 import { styled } from "@mui/system";
 import { FiMinus, FiPlus } from "react-icons/fi";
 
+const itemA = {
+  hidden: { scale: 0, top: 100 },
+  show: { scale: 1, top: 30 },
+};
+
+const itemB = {
+  hidden: { scale: 0, top: 200 },
+  show: { scale: 1, top: 80 },
+};
+
 const StyledCard = styled(Card)(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
