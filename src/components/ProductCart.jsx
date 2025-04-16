@@ -1,4 +1,10 @@
-import { useState } from "react";
+import {
+  addToCart,
+  decrementAmount,
+  incrementAmount,
+} from "../app/features/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   Typography,
   Grid,
@@ -34,6 +40,26 @@ const StyledCard = styled(Card)(({ theme }) => ({
 }));
 
 function ProductCart({ product }) {
+  const dispatch = useDispatch();
+  const { cart } = useSelector((store) => store.cart);
+  const isAdded = cart.find((i) => i.id == product.id);
+  const handleBuy = (e) => {
+    e.preventDefault();
+    dispatch(
+      addToCart({
+        ...product,
+        amount: 1,
+      })
+    );
+  };
+
+  const handleQuantityChange = (id, isIncrement) => {
+    if (isIncrement) {
+      dispatch(incrementAmount(id));
+    } else {
+      dispatch(decrementAmount(id));
+    }
+  };
   return (
     <div>
       <StyledCard key={product.id}>
@@ -77,23 +103,32 @@ function ProductCart({ product }) {
                 alignItems="center"
                 justifyContent="flex-start"
               >
-                <IconButton
-                  onClick={() => handleQuantityChange(product.id, false)}
+                {isAdded && (
+                  <>
+                    <IconButton
+                      onClick={() => handleQuantityChange(product.id, false)}
+                      color="primary"
+                      size="small"
+                    >
+                      <FiMinus />
+                    </IconButton>
+                    <Typography>{isAdded.amount}</Typography>
+                    <IconButton
+                      onClick={() => handleQuantityChange(product.id, true)}
+                      color="primary"
+                      size="small"
+                    >
+                      <FiPlus />
+                    </IconButton>
+                  </>
+                )}
+                <Button
+                  onClick={handleBuy}
+                  variant="contained"
                   color="primary"
-                  size="small"
+                  sx={{ ml: 2 }}
                 >
-                  <FiMinus />
-                </IconButton>
-                <Typography>{product.discountPercentage}</Typography>
-                <IconButton
-                  onClick={() => handleQuantityChange(product.id, true)}
-                  color="primary"
-                  size="small"
-                >
-                  <FiPlus />
-                </IconButton>
-                <Button variant="contained" color="primary" sx={{ ml: 2 }}>
-                  Add to Cart
+                  {isAdded ? "In Cart" : "Add to Cart"}
                 </Button>
               </Stack>
             </Grid>
